@@ -12,41 +12,36 @@ function QRScanner() {
 
   function captureFrame(){
     setShowWebcam(true)
-    
-  }
+    // Capture a frame from the video stream
+    const video = webcamRef.current.video;
+    const canvas = document.createElement('canvas');
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+    const imageData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height);
 
-  useEffect(() => {
-    if (showWebcam) {
-      console.log("inside show webcam")
-      // Capture a frame from the video stream
-      const video = webcamRef.current.video;
-      const canvas = document.createElement('canvas');
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-      const imageData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height);
-
-      // Scan for the QR code
-      const code = jsQR(imageData.data, imageData.width, imageData.height);
-      if (code) {
-        console.log(code.data)
-        if(code.data.includes('pmicustid')){
-          setShowWebcam(false)
-          setRenderOnce(true);
-          const scannedTextArr = code.data.split('-')
-          setScannedData('Customer found, ID: ' + scannedTextArr[1]);
-        }
-        else{
-          // Request the next frame
-          requestAnimationFrame(captureFrame);
-        }
+    // Scan for the QR code
+    const code = jsQR(imageData.data, imageData.width, imageData.height);
+    if (code) {
+      console.log(code.data)
+      if(code.data.includes('pmicustid')){
+        setShowWebcam(false)
+        setRenderOnce(true);
+        const scannedTextArr = code.data.split('-')
+        setScannedData('Customer found, ID: ' + scannedTextArr[1]);
       }
       else{
         // Request the next frame
         requestAnimationFrame(captureFrame);
       }
     }
-  }, [showWebcam])
+    else{
+      // Request the next frame
+      requestAnimationFrame(captureFrame);
+    }
+    
+    
+  }
 
   useEffect(() => {
     if (renderOnce) {
