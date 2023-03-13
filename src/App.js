@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Webcam from 'react-webcam';
 import jsQR from "jsqr";
+import { fetchToken, onMessageListener } from './firebase';
 import './App.css';
 
 function QRScanner() {
@@ -10,7 +11,23 @@ function QRScanner() {
   const [scannedData, setScannedData] = useState('');
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
+  const [show, setShow] = useState(false);
+  const [notification, setNotification] = useState({title: '', body: ''});
+  const [isTokenFound, setTokenFound] = useState(false);
+  fetchToken(setTokenFound);
+
   Notification.requestPermission()
+  onMessageListener().then(payload => {
+    setNotification({title: payload.notification.title, body: payload.notification.body})
+    setShow(true);
+    console.log(payload);
+  }).catch(err => console.log('failed: ', err));
+
+  function onShowNotificationClicked(){
+    console.log("test notification")
+    setNotification({title: "Notification", body: "This is a test notification"})
+    setShow(true);
+  }
 
   function captureFrame(){
     setShowWebcam(true)
@@ -47,25 +64,27 @@ function QRScanner() {
 
   useEffect(() => {
     if (renderOnce) {
-      if (Notification.permission === 'granted') {
-        // new Notification('Redemption Status', {
-        //   body: 'Coupon has been redeemed.'
-        // });
-        navigator.serviceWorker.ready.then(function(registration) {
-          registration.showNotification('Coupon has been redeemed');
-        });
-      } else {
-        Notification.requestPermission().then(permission => {
-          if (permission === 'granted') {
-            // new Notification('Redemption Status', {
-            //   body: 'Coupon has been redeemed.'
-            // });
-            navigator.serviceWorker.ready.then(function(registration) {
-              registration.showNotification('Coupon has been redeemed');
-            });
-          }
-        });
-      }
+      // if (Notification.permission === 'granted') {
+      //   // new Notification('Redemption Status', {
+      //   //   body: 'Coupon has been redeemed.'
+      //   // });
+      //   navigator.serviceWorker.ready.then(function(registration) {
+      //     registration.showNotification('Coupon has been redeemed');
+      //   });
+      // } else {
+      //   Notification.requestPermission().then(permission => {
+      //     if (permission === 'granted') {
+      //       // new Notification('Redemption Status', {
+      //       //   body: 'Coupon has been redeemed.'
+      //       // });
+      //       navigator.serviceWorker.ready.then(function(registration) {
+      //         registration.showNotification('Coupon has been redeemed');
+      //       });
+      //     }
+      //   });
+      // }
+
+      onShowNotificationClicked()
       setRenderOnce(false);
     }
   }, [renderOnce])
