@@ -48,14 +48,20 @@ function QRScanner() {
   useEffect(() => {
     if (renderOnce) {
       if (Notification.permission === 'granted') {
-        new Notification('Redemption Status', {
-          body: 'Coupon has been redeemed.'
+        // new Notification('Redemption Status', {
+        //   body: 'Coupon has been redeemed.'
+        // });
+        navigator.serviceWorker.ready.then(function(registration) {
+          registration.showNotification('Coupon has been redeemed');
         });
       } else {
         Notification.requestPermission().then(permission => {
           if (permission === 'granted') {
-            new Notification('Redemption Status', {
-              body: 'Coupon has been redeemed.'
+            // new Notification('Redemption Status', {
+            //   body: 'Coupon has been redeemed.'
+            // });
+            navigator.serviceWorker.ready.then(function(registration) {
+              registration.showNotification('Coupon has been redeemed');
             });
           }
         });
