@@ -10,6 +10,8 @@ function QRScanner() {
   const [scannedData, setScannedData] = useState('');
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
+  Notification.requestPermission()
+
   function captureFrame(){
     setShowWebcam(true)
     // Capture a frame from the video stream
