@@ -16,7 +16,7 @@ function QRScanner() {
   const [isTokenFound, setTokenFound] = useState(false);
   fetchToken(setTokenFound);
 
-  Notification.requestPermission()
+  //Notification.requestPermission()
   onMessageListener().then(payload => {
     setNotification({title: payload.notification.title, body: payload.notification.body})
     setShow(true);
@@ -25,7 +25,7 @@ function QRScanner() {
 
   function onShowNotificationClicked(){
     console.log("test notification")
-    setNotification({title: "Notification", body: "This is a test notification"})
+    setNotification({title: "Notification", body: "QR code has been redeemed."})
     setShow(true);
   }
 
