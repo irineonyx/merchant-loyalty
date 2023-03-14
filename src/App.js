@@ -86,7 +86,8 @@ function QRScanner() {
   return (
     <div className='main'>
       <div className='action'><button onClick={captureFrame} className={showWebcam? 'disabled' : ''}>Scan Customer's QR</button></div>
-      
+      <div className='center'>{showWebcam? 'Scan: Active' : 'Scan: Inactive'}</div>
+      <div className='output'>{scannedData && <p>{scannedData}</p>}</div>
       {
       
        isMobile? (
@@ -98,8 +99,7 @@ function QRScanner() {
       ) 
       
       }
-      <div className='center'>{showWebcam? 'Scan: Active' : 'Scan: Inactive'}</div>
-      <div className='output'>{scannedData && <p>{scannedData}</p>}</div>
+      
       
     </div>
   );
