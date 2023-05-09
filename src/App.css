@@ -1,12 +1,37 @@
+:root {
+  --main-red: #c60d14;
+}
+a {
+  color: unset !important;
+  text-decoration: none !important;
+}
+.text-small {
+  font-size: 12px;
+}
+.bold {
+  font-weight: bold;
+}
 .center {
   text-align: center;
 }
+body {
+  background-color: #f9f9f9 !important;
+}
 .main{
   padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: white;
 }
 video{
   width: 100%;
-  min-height: 500px;
+  height: 100vh;
+  object-fit: cover;
+  position: fixed;
+  z-index: -1;
 }
 .hide{
   visibility: hidden;
@@ -16,16 +41,55 @@ video{
   margin: 30px;
 }
 .action button{
-  padding: 10px 50px;
-  border: none;
-  border-radius: 10px;
+  background: #C60D14;
   color: #ffffff;
-  font-size: 18px;
-  background: #6dbaed;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  padding: 10px 50px;
 }
 .action .disabled{
   background: #a7a7a7;
 }
 .output{
   text-align: center;
+}
+
+.body-float-grey {
+  background: #f9f9f9;
+  width: 100%;
+  height: 100vh;
+  padding: 20px;
+}
+.page-complete .body-float-inner {
+  height: auto;
+}
+.btn-action-active {
+  background: var(--main-red);
+  color: #ffffff;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 6px 50px;
+}
+.back-home {
+  margin-top: 16px;
+}
+.body-float-inner {
+  background: #ffffff;
+  padding: 24px;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+.body-float-inner div {
+  text-align: center;
+  margin-bottom: 16px;
 }
