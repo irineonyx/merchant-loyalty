@@ -60,8 +60,10 @@ const Home = () => {
   }, [videoConstraints]);
 
   useEffect(() => {
-    if(qrResult.length > 0)
+    if(qrResult.length > 0){
+        console.log(qrResult)
         createTransaction()
+    }
   }, [qrResult])
 
   function drawLine(canvas, begin, end, color) {
