@@ -12,10 +12,10 @@ const RedeemComplete = () => {
           <img src={imgComplete} alt="Complete Icon" />
           <div className="bold mt-2">Completed!</div>
           <div>
-            ${state.completedata.vouchers.voucher_points.point} voucher has been redeemed
+            ${state.completedata?.vouchers?.voucher_points?.point} voucher has been redeemed
           </div>
           <div>
-            {state.completedata.vouchers.name} - {state.completedata.vouchers.description}<br></br>{state.completedata.created_at}
+            {state.completedata?.vouchers?.name} - {state.completedata?.vouchers?.description}<br></br>{state.completedata?.created_at}
           </div>
         </div>
         <Link to={'/'}>
