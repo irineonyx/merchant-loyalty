@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useLocation } from 'react-router-dom';
 import imgComplete from './images/icon-complete.png';
 
 const RedeemComplete = () => {
+    const state = useLocation();
+
   return (
     <>
       <div className="body-float-grey page-complete">
@@ -10,11 +12,10 @@ const RedeemComplete = () => {
           <img src={imgComplete} alt="Complete Icon" />
           <div className="bold mt-2">Completed!</div>
           <div>
-            $ voucher has been redeemed
+            ${state.completedata.vouchers.voucher_points.point} voucher has been redeemed
           </div>
           <div>
-            Tampines Mall - Jollibean<br></br>24 Mar 2023 02:36 pm<br></br>ID:
-            1009345938
+            {state.completedata.vouchers.name} - {state.completedata.vouchers.description}<br></br>{state.completedata.created_at}
           </div>
         </div>
         <Link to={'/'}>

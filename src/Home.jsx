@@ -73,26 +73,30 @@ const Home = () => {
   }
 
   function createTransaction(){
-    navigate('/complete');
-    // const requestOptions = {
-    //   method: 'POST',
-    //   headers: { 
-    //     'Content-Type': 'application/json; charset=utf-8',
-    //     'X-System-Language': 'en-EN' },
-    //   body: JSON.stringify({
-    //     "redemption_code" : qrResult,
-    //     "used_for" : "Claim Discount",
-    //     "user_id" : 1
-    // })
-    // };
-    // fetch(`${process.env.REACT_APP_HOST}/api-transaction/v1/transaction/create`, requestOptions)
-    //     .then(response => response.json())
-    //     .then(data => processTransactionResponse(data));
+    //navigate('/complete');
+    const requestOptions = {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json; charset=utf-8',
+        'X-System-Language': 'en-EN' },
+      body: JSON.stringify({
+        "redemption_code" : qrResult,
+        "used_for" : "Claim Discount",
+        "user_id" : 1
+    })
+    };
+    fetch(`${process.env.REACT_APP_HOST}/api-transaction/v1/transaction/create`, requestOptions)
+        .then(response => response.json())
+        .then(data => processTransactionResponse(data));
   }
 
   function processTransactionResponse(data){
     if(data.success){
-        navigate('/complete');
+        navigate('/complete', {
+            state: {
+              completedata: data.result?.redemptions
+            }
+          });
     }
     else{
         alert("please try again. " + data.message)
