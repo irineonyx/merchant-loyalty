@@ -5,6 +5,7 @@ import jsQR from "jsqr";
 import { isMobile } from "react-device-detect";
 import { fetchToken, onMessageListener } from './firebase';
 import './App.css';
+import imgQRBorder from './images/qr-border.png';
 
 const Home = () => {
   const [qrResult, setQrResult] = useState("");
@@ -104,7 +105,11 @@ const Home = () => {
       <video id="qr-video" width="100%" height="100%" autoPlay></video>
       <canvas id="qr-canvas" style={{ display: "none" }}></canvas>
       <p className="center"><strong>Scan QR code to proceed with redemption.</strong></p>
-      <p>QR Result: {qrResult}</p>
+      <div>
+        <img src={imgQRBorder} />
+      </div>
+      <p className="center">Place the QR code within the borders. Focus on the code to scan.</p>
+      <p className="center">QR Result: {qrResult}</p>
     </div>
   );
 };
