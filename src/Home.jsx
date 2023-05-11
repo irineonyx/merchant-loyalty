@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Webcam from 'react-webcam';
 import jsQR from "jsqr";
+import { isMobile } from "react-device-detect";
 import { fetchToken, onMessageListener } from './firebase';
 import './App.css';
 
@@ -10,7 +11,6 @@ const Home = () => {
   const [videoConstraints, setVideoConstraints] = useState({
     facingMode: "environment"
   });
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   const navigate = useNavigate();
   
 
@@ -30,6 +30,7 @@ const Home = () => {
       drawLine(context, code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
       drawLine(context, code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
       setQrResult(code.data);
+      createTransaction()
       
     }
     else{
@@ -39,7 +40,8 @@ const Home = () => {
   };
 
   useEffect(() => {
-    setVideoConstraints({ facingMode: { exact: "user" } });
+    isMobile?
+    setVideoConstraints({ facingMode: { exact: "environment" } }) : setVideoConstraints({ facingMode: { exact: "user" } });
   }, [])
   useEffect(() => {
     const video = document.getElementById("qr-video");
@@ -56,9 +58,9 @@ const Home = () => {
     video.addEventListener("playing", scanQRCode);
   }, [videoConstraints]);
 
-  useEffect(() => {
-    createTransaction()
-  }, [qrResult])
+//   useEffect(() => {
+//     createTransaction()
+//   }, [qrResult])
 
   function drawLine(canvas, begin, end, color) {
     canvas.beginPath();
@@ -70,21 +72,21 @@ const Home = () => {
   }
 
   function createTransaction(){
-    //navigate('/complete');
-    const requestOptions = {
-      method: 'POST',
-      headers: { 
-        'Content-Type': 'application/json; charset=utf-8',
-        'X-System-Language': 'en-EN' },
-      body: JSON.stringify({
-        "redemption_code" : qrResult,
-        "used_for" : "Claim Discount",
-        "user_id" : 1
-    })
-    };
-    fetch(`${process.env.REACT_APP_HOST}/api-transaction/v1/transaction/create`, requestOptions)
-        .then(response => response.json())
-        .then(data => processTransactionResponse(data));
+    navigate('/complete');
+    // const requestOptions = {
+    //   method: 'POST',
+    //   headers: { 
+    //     'Content-Type': 'application/json; charset=utf-8',
+    //     'X-System-Language': 'en-EN' },
+    //   body: JSON.stringify({
+    //     "redemption_code" : qrResult,
+    //     "used_for" : "Claim Discount",
+    //     "user_id" : 1
+    // })
+    // };
+    // fetch(`${process.env.REACT_APP_HOST}/api-transaction/v1/transaction/create`, requestOptions)
+    //     .then(response => response.json())
+    //     .then(data => processTransactionResponse(data));
   }
 
   function processTransactionResponse(data){
@@ -101,7 +103,7 @@ const Home = () => {
     <div className='main'>
       <video id="qr-video" width="100%" height="100%" autoPlay></video>
       <canvas id="qr-canvas" style={{ display: "none" }}></canvas>
-      <p class="center"><strong>Scan QR code to proceed with redemption.</strong></p>
+      <p className="center"><strong>Scan QR code to proceed with redemption.</strong></p>
       <p>QR Result: {qrResult}</p>
     </div>
   );
