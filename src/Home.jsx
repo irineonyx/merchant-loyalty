@@ -59,9 +59,10 @@ const Home = () => {
     video.addEventListener("playing", scanQRCode);
   }, [videoConstraints]);
 
-//   useEffect(() => {
-//     createTransaction()
-//   }, [qrResult])
+  useEffect(() => {
+    if(qrResult.length > 0)
+        createTransaction()
+  }, [qrResult])
 
   function drawLine(canvas, begin, end, color) {
     canvas.beginPath();
