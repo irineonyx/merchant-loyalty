@@ -4,6 +4,7 @@ import imgComplete from './images/icon-complete.png';
 
 const RedeemComplete = () => {
     const state = useLocation();
+    console.log(state.completedata)
 
   return (
     <>
