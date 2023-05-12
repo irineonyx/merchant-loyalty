@@ -31,7 +31,6 @@ const Home = () => {
       drawLine(context, code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
       drawLine(context, code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
       setQrResult(code.data);
-      createTransaction()
       
     }
     else{
