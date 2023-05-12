@@ -60,7 +60,7 @@ const Home = () => {
   }, [videoConstraints]);
 
   useEffect(() => {
-    if(qrResult.length > 0){
+    if(qrResult.length > 1){
         console.log(qrResult)
         createTransaction()
     }
@@ -116,7 +116,6 @@ const Home = () => {
         <img src={imgQRBorder} />
       </div>
       <p className="center">Place the QR code within the borders. Focus on the code to scan.</p>
-      <p className="center">QR Result: {qrResult}</p>
     </div>
   );
 };
