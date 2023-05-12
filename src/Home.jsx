@@ -60,8 +60,16 @@ const Home = () => {
 
   useEffect(() => {
     if(qrResult.length > 1 && qrResult.includes('HPKQR-')){
-        console.log(qrResult)
-        createTransaction(qrResult)
+        if(qrResult.indexOf('-TIME') > 0){
+            const newQRResult = qrResult.substring(0, qrResult.indexOf('-TIME'))
+            console.log(newQRResult)
+            createTransaction(newQRResult)
+        }
+        else{
+            console.log(qrResult)
+            createTransaction(qrResult)
+        }
+        
     }
   }, [qrResult])
 
