@@ -60,9 +60,9 @@ const Home = () => {
   }, [videoConstraints]);
 
   useEffect(() => {
-    if(qrResult.length > 1){
+    if(qrResult.length > 1 && qrResult.includes('HPKQR-')){
         console.log(qrResult)
-        createTransaction()
+        createTransaction(qrResult)
     }
   }, [qrResult])
 
@@ -75,7 +75,7 @@ const Home = () => {
     canvas.stroke();
   }
 
-  function createTransaction(){
+  function createTransaction(qrCode){
     //navigate('/complete');
     const requestOptions = {
       method: 'POST',
@@ -83,7 +83,7 @@ const Home = () => {
         'Content-Type': 'application/json; charset=utf-8',
         'X-System-Language': 'en-EN' },
       body: JSON.stringify({
-        "redemption_code" : qrResult,
+        "redemption_code" : qrCode,
         "used_for" : "Claim Discount",
         "user_id" : 1
     })
