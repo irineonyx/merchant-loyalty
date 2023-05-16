@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Webcam from 'react-webcam';
 import jsQR from "jsqr";
 import { isMobile } from "react-device-detect";
-import { fetchToken, onMessageListener } from './firebase';
 import './App.css';
 import imgQRBorder from './images/qr-border.png';
+import moment from 'moment';
 
 const Home = () => {
   const [qrResult, setQrResult] = useState("");
@@ -62,9 +61,18 @@ const Home = () => {
   useEffect(() => {
     if(qrResult.length > 1 && qrResult.includes('HPKQR-')){
         if(qrResult.indexOf('-TIME') > 0){
-            const newQRResult = qrResult.substring(0, qrResult.indexOf('-TIME'))
-            console.log(newQRResult)
-            createTransaction(newQRResult)
+            const redemptionCode = qrResult.substring(0, qrResult.indexOf('-TIME'))
+            const timestampUser = qrResult.substring(qrResult.indexOf('-TIME')+5, qrResult.length)
+            const timestampCurrent = moment()
+            const timestampDiff = timestampCurrent.diff(timestampUser, 'seconds', true)
+            console.log("time diff: " + timestampDiff)
+            if(timestampDiff > 30){
+              navigate('/expired');
+            }
+            else{
+              createTransaction(redemptionCode)
+            }
+            
         }
         else{
             console.log(qrResult)
