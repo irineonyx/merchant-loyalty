@@ -49,6 +49,7 @@ const Home = () => {
       .getUserMedia({ video: videoConstraints })
       .then((stream) => {
         video.srcObject = stream;
+        video.setAttribute("playsinline", true);
         video.play();
       })
       .catch((error) => {
