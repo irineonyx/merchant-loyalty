@@ -11,6 +11,9 @@ a {
 .page-complete .text-small{
   font-size: 14px;
 }
+.page-complete img{
+  margin-bottom: 8px;
+}
 .bold {
   font-weight: bold;
 }
