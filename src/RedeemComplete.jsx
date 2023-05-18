@@ -13,9 +13,10 @@ const RedeemComplete = () => {
           <img src={imgComplete} alt="Complete Icon" />
           <div className="bold mt-2">Completed!</div>
           <div>
-            ${state.completedata?.vouchers?.voucher_points?.point} voucher has been redeemed
+            <div className='bold'>${state.completedata?.vouchers?.voucher_points?.point} voucher</div> 
+            has been redeemed
           </div>
-          <div>
+          <div className='text-small'>
             {state.completedata?.vouchers?.description}
             <br></br>
             {moment().format('DD MMM YYYY h:mm a')}

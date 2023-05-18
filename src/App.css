@@ -8,6 +8,9 @@ a {
 .text-small {
   font-size: 12px;
 }
+.page-complete .text-small{
+  font-size: 14px;
+}
 .bold {
   font-weight: bold;
 }
