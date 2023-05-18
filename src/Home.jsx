@@ -111,6 +111,8 @@ const Home = () => {
 
   function processTransactionResponse(data){
     if(data.success){
+      console.log(data.result?.redemptions)
+      console.log("points: " + data.result?.redemptions.vouchers.voucher_points.point)
         navigate('/complete', {
             state: {
               completedata: data.result?.redemptions

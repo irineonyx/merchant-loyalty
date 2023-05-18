@@ -3,7 +3,8 @@ import { Link,useLocation } from 'react-router-dom';
 import imgComplete from './images/icon-complete.png';
 
 const RedeemComplete = () => {
-    const state = useLocation();
+    const {state} = useLocation();
+    console.log(state)
     console.log(state.completedata)
 
   return (
