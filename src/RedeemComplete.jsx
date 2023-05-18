@@ -16,9 +16,9 @@ const RedeemComplete = () => {
             ${state.completedata?.vouchers?.voucher_points?.point} voucher has been redeemed
           </div>
           <div>
-            {state.completedata?.vouchers?.name} - {state.completedata?.vouchers?.description}
+            {state.completedata?.vouchers?.description}
             <br></br>
-            {moment(state.completedata?.created_at).format('DD MMM YYYY h:mm a')}
+            {moment().format('DD MMM YYYY h:mm a')}
           </div>
         </div>
         <Link to={'/'}>
