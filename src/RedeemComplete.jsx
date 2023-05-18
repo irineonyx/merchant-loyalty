@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { Link,useLocation } from 'react-router-dom';
 import imgComplete from './images/icon-complete.png';
+import moment from 'moment';
 
 const RedeemComplete = () => {
     const {state} = useLocation();
-    console.log(state)
-    console.log(state.completedata)
 
   return (
     <>
@@ -17,7 +16,9 @@ const RedeemComplete = () => {
             ${state.completedata?.vouchers?.voucher_points?.point} voucher has been redeemed
           </div>
           <div>
-            {state.completedata?.vouchers?.name} - {state.completedata?.vouchers?.description}<br></br>{state.completedata?.created_at}
+            {state.completedata?.vouchers?.name} - {state.completedata?.vouchers?.description}
+            <br></br>
+            {moment(state.completedata?.created_at).format('DD MMM YYYY h:mm a')}
           </div>
         </div>
         <Link to={'/'}>
