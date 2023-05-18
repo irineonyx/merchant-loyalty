@@ -119,6 +119,7 @@ const Home = () => {
     }
     else{
         alert("please try again. " + data.message)
+        scanQRCode()
     }
     
   }

@@ -7,9 +7,9 @@ const RedeemExpired = () => {
     <>
       <div className="body-float-grey page-complete">
         <div className="body-float-inner">
-          <div className="bold mt-2">Oh no! Redeem code expired</div>
+          <div className="bold mt-2">Redemption code has expired</div>
           <div>
-            The redemption code was expired already. Please scan a new QR code for redemption.
+          Sorry, the redemption code has expired. Please return to My Rewards to claim the active rewards.
           </div>
         </div>
         <Link to={'/'}>
