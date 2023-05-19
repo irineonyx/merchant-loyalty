@@ -23,17 +23,16 @@ const Home = () => {
     const code = jsQR(imageData.data, imageData.width, imageData.height, {
       inversionAttempts: "dontInvert"
     });
-    //console.log("scanning")
     if (code) {
       drawLine(context, code.location.topLeftCorner, code.location.topRightCorner, "#FF3B58");
       drawLine(context, code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
       drawLine(context, code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
       drawLine(context, code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
       setQrResult(code.data);
-      
+      console.log(code.data)
     }
     else{
-      //console.log("not getting qr")
+      console.log("not getting qr")
       requestAnimationFrame(scanQRCode)
     }
   };
