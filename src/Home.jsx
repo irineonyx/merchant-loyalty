@@ -66,7 +66,7 @@ const Home = () => {
             const timestampCurrent = moment()
             const timestampDiff = timestampCurrent.diff(timestampUser, 'seconds', true)
             console.log("time diff: " + timestampDiff)
-            if(timestampDiff > 30){
+            if(timestampDiff > 60){
               navigate('/expired');
             }
             else{
