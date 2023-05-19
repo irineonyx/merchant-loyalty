@@ -79,7 +79,8 @@ const Home = () => {
         }
         
     }
-    else{
+    else if(qrResult.length > 1){
+      console.log("invalid QR " + qrResult)
       alert("Invalid QR Code, please try again.")
       scanQRCode()
     }
