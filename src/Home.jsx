@@ -80,6 +80,10 @@ const Home = () => {
         }
         
     }
+    else{
+      alert("Invalid QR Code, please try again.")
+      scanQRCode()
+    }
   }, [qrResult])
 
   function drawLine(canvas, begin, end, color) {
@@ -118,7 +122,7 @@ const Home = () => {
           });
     }
     else{
-        alert("please try again. " + data.message)
+        alert("Please try again. " + data.message)
         scanQRCode()
     }
     
