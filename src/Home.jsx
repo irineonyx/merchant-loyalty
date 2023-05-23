@@ -8,6 +8,7 @@ import moment from 'moment';
 
 const Home = () => {
   const [qrResult, setQrResult] = useState("");
+  const [amountScan, setAmountScan] = useState(0);
   const [videoConstraints, setVideoConstraints] = useState({
     facingMode: "environment"
   });
@@ -15,6 +16,7 @@ const Home = () => {
   
 
   const scanQRCode = () => {
+    setAmountScan(amountScan + 1);
     const canvas = document.getElementById("qr-canvas");
     const context = canvas.getContext("2d");
     const video = document.getElementById("qr-video");
@@ -57,7 +59,7 @@ const Home = () => {
   }, [videoConstraints]);
 
   useEffect(() => {
-    console.log("qr result: " + qrResult)
+    console.log("scan at: " + amountScan + " --- qr result: " + qrResult)
     if(qrResult.length > 1 && qrResult.includes('HPKQR-')){
         if(qrResult.indexOf('-TIME') > 0){
             const redemptionCode = qrResult.substring(0, qrResult.indexOf('-TIME'))
@@ -82,9 +84,10 @@ const Home = () => {
     else if(qrResult.length > 1){
       console.log("invalid QR " + qrResult)
       alert("Invalid QR Code, please try again.")
+      setQrResult("")
       scanQRCode()
     }
-  }, [qrResult])
+  }, [amountScan, qrResult])
 
   function drawLine(canvas, begin, end, color) {
     canvas.beginPath();
