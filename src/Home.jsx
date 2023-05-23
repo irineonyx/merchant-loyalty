@@ -29,7 +29,6 @@ const Home = () => {
       drawLine(context, code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
       drawLine(context, code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
       setQrResult(code.data);
-      console.log(code.data)
     }
     else{
       console.log("not getting qr")
@@ -58,6 +57,7 @@ const Home = () => {
   }, [videoConstraints]);
 
   useEffect(() => {
+    console.log("qr result: " + qrResult)
     if(qrResult.length > 1 && qrResult.includes('HPKQR-')){
         if(qrResult.indexOf('-TIME') > 0){
             const redemptionCode = qrResult.substring(0, qrResult.indexOf('-TIME'))
