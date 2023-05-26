@@ -13,7 +13,7 @@ const RedeemComplete = () => {
           <img src={imgComplete} alt="Complete Icon" />
           <div className="bold mt-2">Completed!</div>
           <div>
-            <span className='bold'>{state.completedata?.vouchers?.description}</span>
+            <span className='bold'>{state.completedata?.vouchers?.name}</span>
             <br></br> 
             has been redeemed
           </div>
